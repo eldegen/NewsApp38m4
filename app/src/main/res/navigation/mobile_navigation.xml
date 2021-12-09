@@ -25,6 +25,11 @@
     <fragment
         android:id="@+id/newFragment"
         android:name="com.example.newsapp38m4.NewFragment"
-        android:label="News"
+        android:label="@string/fragment_news"
         tools:layout="@layout/fragment_new" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.newsapp38m4.ProfileFragment"
+        android:label="@string/fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
