@@ -10,4 +10,6 @@
     <string name="profile">Profile</string>
     <string name="fragment_news">News</string>
     <string name="fragment_profile">Profile</string>
+    <string name="news_title">News Title</string>
+    <string name="date_blank">DD.MM.YYYY</string>
 </resources>
