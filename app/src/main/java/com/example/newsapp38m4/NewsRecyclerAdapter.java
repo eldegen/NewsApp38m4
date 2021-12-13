@@ -36,9 +36,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     }
 
     public void addItem(NewsItemModel newsItemModel) {
-        list.add(newsItemModel);
-//        notifyItemInserted(0);
-        notifyDataSetChanged();
+        list.add(0, newsItemModel);
+        notifyItemInserted(0);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
