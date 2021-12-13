@@ -1,6 +1,8 @@
 package com.example.newsapp38m4;
 
-public class NewsItemModel {
+import java.io.Serializable;
+
+public class NewsItemModel implements Serializable {
     private String newsTitle;
     private long newsDate;
 

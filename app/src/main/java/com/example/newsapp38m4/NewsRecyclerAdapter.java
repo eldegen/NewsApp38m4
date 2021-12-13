@@ -27,17 +27,29 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.onBind(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
+    }
+
+    public void addItem(NewsItemModel newsItemModel) {
+        list.add(newsItemModel);
+//        notifyItemInserted(0);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(@NonNull ItemNewsBinding itemView) {
-            super(itemView.getRoot());
+        private ItemNewsBinding binding;
+        public ViewHolder(@NonNull ItemNewsBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void onBind(NewsItemModel newsItemModel) {
+            binding.tvNewsTitle.setText(newsItemModel.getNewsTitle());
         }
     }
 }

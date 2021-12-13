@@ -13,16 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.newsapp38m4.databinding.FragmentNewBinding;
+import com.example.newsapp38m4.databinding.FragmentNewsBinding;
 
-public class NewFragment extends Fragment {
-    private FragmentNewBinding binding;
+public class NewsFragment extends Fragment {
+    private FragmentNewsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentNewBinding.inflate(inflater, container, false);
+        binding = FragmentNewsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -39,8 +39,9 @@ public class NewFragment extends Fragment {
 
     private void open() {
         String text = binding.editText.getText().toString();
+        NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
         Bundle bundle = new Bundle();
-        bundle.putString("new.text", text);
+        bundle.putSerializable("news.content", newsItemModel);
         getParentFragmentManager().setFragmentResult("rk.news", bundle);
         Log.e("f_home", "reached");
         close();

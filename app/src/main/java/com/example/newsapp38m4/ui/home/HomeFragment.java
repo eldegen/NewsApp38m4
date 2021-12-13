@@ -16,11 +16,21 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.newsapp38m4.NewsItemModel;
+import com.example.newsapp38m4.NewsRecyclerAdapter;
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentHomeBinding;
+import com.example.newsapp38m4.databinding.ItemNewsBinding;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
+    private NewsRecyclerAdapter recyclerAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        recyclerAdapter = new NewsRecyclerAdapter();
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -39,15 +49,22 @@ public class HomeFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("rk.news", getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String text = result.getString("new.text");
-                Log.e("f_home", "got String: " + text);
+                NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
+
+                recyclerAdapter.addItem(newsItemModel);
             }
         });
+
+        initList();
+    }
+
+    private void initList() {
+        binding.rvHome.setAdapter(recyclerAdapter);
     }
 
     private void openFragment() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-        navController.navigate(R.id.newFragment);
+        navController.navigate(R.id.newsFragment);
     }
 
     @Override

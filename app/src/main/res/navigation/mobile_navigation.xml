@@ -23,10 +23,10 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/newFragment"
-        android:name="com.example.newsapp38m4.NewFragment"
+        android:id="@+id/newsFragment"
+        android:name="com.example.newsapp38m4.NewsFragment"
         android:label="@string/fragment_news"
-        tools:layout="@layout/fragment_new" />
+        tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.newsapp38m4.ProfileFragment"
