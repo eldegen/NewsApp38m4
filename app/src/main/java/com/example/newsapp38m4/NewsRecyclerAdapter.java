@@ -1,5 +1,6 @@
 package com.example.newsapp38m4;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder> {
     private ArrayList<NewsItemModel> list;
+    private OnItemClickListener onItemClickListener;
 
     public NewsRecyclerAdapter() {
         list = new ArrayList<>();
@@ -40,11 +42,34 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         notifyItemInserted(0);
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public NewsItemModel getItem(int position) {
+        return list.get(position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemNewsBinding binding;
         public ViewHolder(@NonNull ItemNewsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*Bundle bundle = new Bundle();
+                    bundle.putString("news.edit", );*/
+                    onItemClickListener.onClick(getAdapterPosition());
+                }
+            });
+            binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListener.onLongClick(getAdapterPosition());
+                    return true;
+                }
+            });
         }
 
         public void onBind(NewsItemModel newsItemModel) {

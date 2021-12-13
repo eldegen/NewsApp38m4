@@ -16,10 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.newsapp38m4.NewsFragment;
 import com.example.newsapp38m4.NewsItemModel;
 import com.example.newsapp38m4.NewsRecyclerAdapter;
+import com.example.newsapp38m4.OnItemClickListener;
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentHomeBinding;
+import com.example.newsapp38m4.databinding.FragmentNewsBinding;
 import com.example.newsapp38m4.databinding.ItemNewsBinding;
 
 public class HomeFragment extends Fragment {
@@ -30,6 +33,21 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recyclerAdapter = new NewsRecyclerAdapter();
+        recyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                NewsItemModel newsItemModel = recyclerAdapter.getItem(position);
+                Log.e("f_home", "got String from model: " + newsItemModel.getNewsTitle());
+                Bundle bundle = new Bundle();
+                bundle.putString("news.edittext", newsItemModel.getNewsTitle());
+                openFragment();
+            }
+
+            @Override
+            public void onLongClick(int position) {
+
+            }
+        });
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
