@@ -1,11 +1,14 @@
 package com.example.newsapp38m4.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,16 +39,32 @@ public class HomeFragment extends Fragment {
         recyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                NewsItemModel newsItemModel = recyclerAdapter.getItem(position);
-                Log.e("f_home", "got String from model: " + newsItemModel.getNewsTitle());
+                recyclerAdapter.editItem(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("news.edittext", newsItemModel.getNewsTitle());
+                bundle.putBoolean("news.is.editing", true);
                 openFragment();
+
             }
 
             @Override
             public void onLongClick(int position) {
-
+                NewsItemModel newsItemModel = recyclerAdapter.getItem(position);
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setTitle("Delete?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        recyclerAdapter.deleteItem(position);
+                        Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alert.show();
             }
         });
     }
@@ -68,11 +87,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
-
                 recyclerAdapter.addItem(newsItemModel);
             }
         });
-
         initList();
     }
 

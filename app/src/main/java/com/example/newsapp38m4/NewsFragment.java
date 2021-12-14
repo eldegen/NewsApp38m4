@@ -33,8 +33,22 @@ public class NewsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 open();
+                openEdit();
             }
         });
+    }
+
+    private void openEdit() {
+        Bundle bundle = new Bundle();
+        if (bundle.getBoolean("news.is.editing")) {
+            String text = bundle.getString("news.edititem");
+            NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
+//            TODO: finish that, you need to get String, then put it in adapter and change text on item
+            bundle.putSerializable("news.setedit.content", newsItemModel);
+            getParentFragmentManager().setFragmentResult("rk.news", bundle);
+            Log.e("f_home", "reached 2");
+            close();
+        }
     }
 
     private void open() {

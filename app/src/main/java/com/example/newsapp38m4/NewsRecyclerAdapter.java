@@ -50,6 +50,16 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         return list.get(position);
     }
 
+    public void deleteItem(int position) {
+        list.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void editItem(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString("news.edititem", list.get(position).toString());
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemNewsBinding binding;
         public ViewHolder(@NonNull ItemNewsBinding binding) {
