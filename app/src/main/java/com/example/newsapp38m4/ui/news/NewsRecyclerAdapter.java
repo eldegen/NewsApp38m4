@@ -1,4 +1,4 @@
-package com.example.newsapp38m4;
+package com.example.newsapp38m4.ui.news;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

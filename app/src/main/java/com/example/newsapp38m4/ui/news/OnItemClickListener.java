@@ -1,4 +1,4 @@
-package com.example.newsapp38m4;
+package com.example.newsapp38m4.ui.news;
 
 public interface OnItemClickListener {
     void onClick(int position);

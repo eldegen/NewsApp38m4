@@ -1,4 +1,4 @@
-package com.example.newsapp38m4;
+package com.example.newsapp38m4.ui.news;
 
 import android.os.Bundle;
 
@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentNewsBinding;
 
 public class NewsFragment extends Fragment {
