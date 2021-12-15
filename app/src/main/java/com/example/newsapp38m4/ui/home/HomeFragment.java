@@ -21,6 +21,8 @@ import com.example.newsapp38m4.ui.news.OnItemClickListener;
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentHomeBinding;
 
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private NewsRecyclerAdapter recyclerAdapter;
@@ -80,6 +82,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
+                ArrayList<NewsItemModel> list = new ArrayList<>();
+                list.add(new NewsItemModel("sob", 1));
                 recyclerAdapter.addItem(newsItemModel);
             }
         });
