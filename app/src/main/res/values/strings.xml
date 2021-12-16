@@ -12,4 +12,5 @@
     <string name="fragment_profile">Profile</string>
     <string name="news_title">News Title</string>
     <string name="date_blank">DD.MM.YYYY</string>
+    <string name="title">Title</string>
 </resources>

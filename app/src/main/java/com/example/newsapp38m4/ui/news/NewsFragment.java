@@ -12,12 +12,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentNewsBinding;
+import com.example.newsapp38m4.ui.news.NewsItemModel;
+import com.example.newsapp38m4.ui.news.NewsRecyclerAdapter;
 
 public class NewsFragment extends Fragment {
     private FragmentNewsBinding binding;
+    private NewsRecyclerAdapter recyclerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,33 +34,33 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 open();
-                openEdit();
+
+                /*Bundle bundle = getArguments();
+                if(bundle != null) {
+                    if(bundle.getBoolean("news.edit", true)) {
+                        Toast.makeText(getActivity(), "dasdsadsa", Toast.LENGTH_SHORT).show();
+                    }
+                }*/
             }
         });
     }
 
-    private void openEdit() {
-        Bundle bundle = new Bundle();
-        if (bundle.getBoolean("news.is.editing")) {
-            String text = bundle.getString("news.edititem");
-            NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
-//            TODO: finish that, you need to get String, then put it in adapter and change text on item
-            bundle.putSerializable("news.setedit.content", newsItemModel);
-            getParentFragmentManager().setFragmentResult("rk.news", bundle);
-            Log.e("f_home", "reached 2");
-            close();
-        }
+    private void edit() {
+        // TODO: use SaveArgs to do this
     }
 
     private void open() {
+        Log.e("f_news", "opened");
+
         String text = binding.editText.getText().toString();
         NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
         Bundle bundle = new Bundle();
-        bundle.putSerializable("news.content", newsItemModel);
+        bundle.putSerializable("news.content", newsItemModel); //
         getParentFragmentManager().setFragmentResult("rk.news", bundle);
         Log.e("f_home", "reached");
         close();

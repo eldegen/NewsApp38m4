@@ -60,6 +60,11 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         bundle.putString("news.edititem", list.get(position).toString());
     }
 
+    public String getItemString(int position) {
+        String text = list.get(position).getNewsTitle();
+        return text;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemNewsBinding binding;
         public ViewHolder(@NonNull ItemNewsBinding binding) {

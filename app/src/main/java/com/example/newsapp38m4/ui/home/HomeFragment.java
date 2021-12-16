@@ -3,6 +3,7 @@ package com.example.newsapp38m4.ui.home;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,12 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.newsapp38m4.ui.news.NewsFragment;
 import com.example.newsapp38m4.ui.news.NewsItemModel;
 import com.example.newsapp38m4.ui.news.NewsRecyclerAdapter;
 import com.example.newsapp38m4.ui.news.OnItemClickListener;
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentHomeBinding;
-
-import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
@@ -31,14 +31,48 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recyclerAdapter = new NewsRecyclerAdapter();
+
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment();
+            }
+        });
+        getParentFragmentManager().setFragmentResultListener("rk.news", getViewLifecycleOwner(), new FragmentResultListener() {
+
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
+
+                recyclerAdapter.addItem(newsItemModel);
+            }
+        });
+        initList();
+
         recyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
                 recyclerAdapter.editItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("news.is.editing", true);
-                openFragment();
+                String titleText = recyclerAdapter.getItemString(position);
+                Log.e("f_home", "sent String to edit: " + titleText);
+//                EditText editText = view.findViewById(R.id.edit_text);
 
+                NewsFragment newsFragment = new NewsFragment();
+                Bundle bundle = new Bundle();
+//                bundle.putBoolean("news.edit", true);
+                bundle.putString("news.edit.title", titleText);
+                newsFragment.setArguments(bundle);
+                openFragment();
             }
 
             @Override
@@ -62,32 +96,6 @@ public class HomeFragment extends Fragment {
                 alert.show();
             }
         });
-    }
-
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFragment();
-            }
-        });
-        getParentFragmentManager().setFragmentResultListener("rk.news", getViewLifecycleOwner(), new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
-                ArrayList<NewsItemModel> list = new ArrayList<>();
-                list.add(new NewsItemModel("sob", 1));
-                recyclerAdapter.addItem(newsItemModel);
-            }
-        });
-        initList();
     }
 
     private void initList() {
