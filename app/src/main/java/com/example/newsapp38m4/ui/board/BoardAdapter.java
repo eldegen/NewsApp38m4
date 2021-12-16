@@ -43,7 +43,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvTitle, tvSubtitle;
+        private TextView tvTitle, tvSubtitle, tvSkip;
         private ImageView imageView;
         private Button btnStart;
         public ViewHolder(@NonNull View itemView) {

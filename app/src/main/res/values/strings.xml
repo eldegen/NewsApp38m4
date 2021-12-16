@@ -14,4 +14,5 @@
     <string name="date_blank">DD.MM.YYYY</string>
     <string name="title">Title</string>
     <string name="btn_start_text">Start</string>
+    <string name="skip_board_text">Skip</string>
 </resources>

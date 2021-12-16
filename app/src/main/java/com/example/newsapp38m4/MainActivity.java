@@ -49,11 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
                 if (destination.getId() == R.id.navigation_home || destination.getId() == R.id.navigation_dashboard || destination.getId() == R.id.navigation_notifications || destination.getId() == R.id.profileFragment) {
                     binding.navView.setVisibility(View.VISIBLE);
+                    binding.tvSkipBoard.setVisibility(View.GONE);
                 } else {
                     binding.navView.setVisibility(View.GONE);
+                    binding.tvSkipBoard.setVisibility(View.VISIBLE);
                 }
             }
         });
+
+        binding.tvSkipBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigateUp();
+            }
+        });
+
     }
 
     @Override
