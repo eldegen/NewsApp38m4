@@ -39,13 +39,6 @@ public class NewsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 open();
-
-                /*Bundle bundle = getArguments();
-                if(bundle != null) {
-                    if(bundle.getBoolean("news.edit", true)) {
-                        Toast.makeText(getActivity(), "dasdsadsa", Toast.LENGTH_SHORT).show();
-                    }
-                }*/
             }
         });
     }

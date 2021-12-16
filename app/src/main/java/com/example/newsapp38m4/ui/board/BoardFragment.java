@@ -31,11 +31,11 @@ public class BoardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         BoardAdapter adapter = new BoardAdapter();
         binding.viewPager.setAdapter(adapter);
-        /*requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 requireActivity().finish();
             }
-        });*/
+        });
     }
 }

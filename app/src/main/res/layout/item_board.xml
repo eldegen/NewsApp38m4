@@ -30,4 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:id="@+id/btn_start"
+        android:visibility="invisible"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="40dp"
+        android:text="@string/btn_start_text"
+        android:backgroundTint="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
