@@ -44,7 +44,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTitle, tvSubtitle, tvSkip;
-        private ImageView imageView;
+        private ImageView imageView, ivFirstDot, ivSecondDot, ivThirdDot;
         private Button btnStart;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,6 +52,10 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             tvSubtitle = itemView.findViewById(R.id.tv_subtitle);
             imageView = itemView.findViewById(R.id.image_view);
             btnStart = itemView.findViewById(R.id.btn_start);
+
+            ivFirstDot = itemView.findViewById(R.id.iv_first_dot);
+            ivSecondDot = itemView.findViewById(R.id.iv_second_dot);
+            ivThirdDot = itemView.findViewById(R.id.iv_third_dot);
 
             btnStart.setOnClickListener(new View.OnClickListener() {
                 @Override
