@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsapp38m4.R;
@@ -17,6 +18,12 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     private String[] titles = new String[] {"a", "b", "c"};
     private String[] subtitles = new String[] {"sub a", "sub b", "sub c"};
     private int[] images = new int[] {R.drawable.ic_newspage, R.drawable.img_newspaper, R.drawable.img_news_globus};
+
+    private NavController navController;
+
+    public BoardAdapter(NavController navController) {
+        this.navController = navController;
+    }
 
     @NonNull
     @Override
@@ -49,7 +56,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             btnStart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    navController.navigateUp();
                 }
             });
         }
