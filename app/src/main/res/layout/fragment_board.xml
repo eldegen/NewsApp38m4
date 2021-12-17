@@ -19,24 +19,18 @@
         android:layout_width="match_parent"
         android:layout_height="80dp">
 
-        <ImageView
-            android:id="@+id/iv_first_dot"
-            android:src="@drawable/ic_circle_transparent"
-            android:layout_width="14dp"
-            android:layout_height="14dp"/>
-
-        <ImageView
-            android:id="@+id/iv_second_dot"
-            android:src="@drawable/ic_circle_transparent"
-            android:layout_marginHorizontal="5dp"
-            android:layout_width="14dp"
-            android:layout_height="14dp"/>
-
-        <ImageView
-            android:id="@+id/iv_third_dot"
-            android:src="@drawable/ic_circle_transparent"
-            android:layout_width="14dp"
-            android:layout_height="14dp"/>
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dotsColor="@color/gray"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="16dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="2.5"
+            app:selectedDotColor="@color/purple_500"
+            app:progressMode="true"
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

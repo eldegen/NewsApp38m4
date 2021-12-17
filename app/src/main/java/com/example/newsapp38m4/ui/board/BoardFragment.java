@@ -34,6 +34,8 @@ public class BoardFragment extends Fragment {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         BoardAdapter adapter = new BoardAdapter(navController);
         binding.viewPager.setAdapter(adapter);
+        binding.dotsIndicator.setViewPager2(binding.viewPager); // лучшая библиотека для индикаторов в мире
+
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
