@@ -48,6 +48,7 @@ public class NewsFragment extends Fragment {
 
         String text = binding.editText.getText().toString();
         NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
+        Log.d("f_global", "millis: " + newsItemModel.getNewsDate());
         Bundle bundle = new Bundle();
         bundle.putSerializable("news.content", newsItemModel); //
         getParentFragmentManager().setFragmentResult("rk.news", bundle);

@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsapp38m4.databinding.ItemNewsBinding;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder> {
     private ArrayList<NewsItemModel> list;
+//    private ArrayList<NewsItemModel> date;
     private OnItemClickListener onItemClickListener;
 
     public NewsRecyclerAdapter() {
         list = new ArrayList<>();
+//        date = new ArrayList<>();
     }
 
     @NonNull
@@ -88,8 +91,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         }
 
         public void onBind(NewsItemModel newsItemModel) {
+            long bufferDate = newsItemModel.getNewsDate();
+            // String putDate = String.valueOf(bufferDate);
+            String newPutDate = DateFormat.getInstance().format(bufferDate);
+
             binding.tvNewsTitle.setText(newsItemModel.getNewsTitle());
-            binding.tvNewsDate.setText("1");
+            binding.tvNewsDate.setText(newPutDate);
         }
     }
 }
