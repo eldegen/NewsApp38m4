@@ -43,10 +43,6 @@ public class NewsFragment extends Fragment {
         });
     }
 
-    private void edit() {
-        // TODO: use SaveArgs to do this
-    }
-
     private void open() {
         Log.e("f_news", "opened");
 

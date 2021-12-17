@@ -89,6 +89,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
         public void onBind(NewsItemModel newsItemModel) {
             binding.tvNewsTitle.setText(newsItemModel.getNewsTitle());
+            binding.tvNewsDate.setText("1");
         }
     }
 }
