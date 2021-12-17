@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
                     binding.tvSkipBoard.setVisibility(View.GONE);
                 } else {
                     binding.navView.setVisibility(View.GONE);
-                    binding.tvSkipBoard.setVisibility(View.VISIBLE);
+                    if (destination.getId() != R.id.newsFragment) {
+                        binding.tvSkipBoard.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
