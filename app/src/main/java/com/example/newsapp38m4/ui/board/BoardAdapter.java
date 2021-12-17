@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.newsapp38m4.R;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
-    private String[] titles = new String[] {"a", "b", "c"};
-    private String[] subtitles = new String[] {"sub a", "sub b", "sub c"};
+    private String[] titles = new String[] {"Добро пожаловать!", "Новости всегда и везде!", "Новости в прямом эфире!"};
+    private String[] subtitles = new String[] {"В лучший новостной портал", "Все необходимые новости под рукой", "Прямо из приложения, без использования сторонних сервисов"};
     private int[] images = new int[] {R.drawable.ic_newspage, R.drawable.img_newspaper, R.drawable.img_news_globus};
 
     private NavController navController;
