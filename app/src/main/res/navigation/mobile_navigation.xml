@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.newsapp38m4.ProfileFragment"
+        android:name="com.example.newsapp38m4.ui.ProfileFragment.ProfileFragment"
         android:label="@string/fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment

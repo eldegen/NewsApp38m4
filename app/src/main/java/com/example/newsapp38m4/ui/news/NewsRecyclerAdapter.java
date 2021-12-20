@@ -42,11 +42,16 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     public void addItem(NewsItemModel newsItemModel) {
         list.add(0, newsItemModel);
+
         notifyItemInserted(0);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public int setItemColor(int bgColor) {
+        return bgColor;
     }
 
     public NewsItemModel getItem(int position) {

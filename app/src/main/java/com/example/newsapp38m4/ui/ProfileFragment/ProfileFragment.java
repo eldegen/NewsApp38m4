@@ -1,4 +1,4 @@
-package com.example.newsapp38m4;
+package com.example.newsapp38m4.ui.ProfileFragment;
 
 import static android.app.Activity.RESULT_OK;
 

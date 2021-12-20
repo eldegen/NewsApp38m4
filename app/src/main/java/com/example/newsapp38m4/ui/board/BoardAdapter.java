@@ -1,5 +1,6 @@
 package com.example.newsapp38m4.ui.board;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.newsapp38m4.Prefs;
 import com.example.newsapp38m4.R;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
@@ -20,6 +22,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     private int[] images = new int[] {R.drawable.ic_newspage, R.drawable.img_newspaper, R.drawable.img_news_globus};
 
     private NavController navController;
+    private Context context;
 
     public BoardAdapter(NavController navController) {
         this.navController = navController;
@@ -28,6 +31,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        this.context = parent.getContext();
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_board, parent, false));
     }
 
@@ -56,6 +60,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             btnStart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    new Prefs(context).saveBoardState();
                     navController.navigateUp();
                 }
             });
