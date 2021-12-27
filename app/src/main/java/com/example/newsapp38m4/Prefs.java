@@ -21,13 +21,13 @@ public class Prefs {
 
     //
 
-    /*public void putProfileAvatar(Uri AvatarURI) {
+    public void saveProfileAvatar(Uri AvatarURI) {
         preferences.edit().putString("putAvatar", AvatarURI.toString()).apply();
     }
 
-    public String getProfileAvatar() {
+    public String loadProfileAvatar() {
         return preferences.getString("putAvatar", null);
-    }*/
+    }
 
     //
 

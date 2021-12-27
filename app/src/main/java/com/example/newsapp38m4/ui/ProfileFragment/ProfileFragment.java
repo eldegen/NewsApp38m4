@@ -46,7 +46,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.ivAvatar.setImageURI(avatarBuffer);
+//        binding.ivAvatar.setImageURI(avatarBuffer);
         initProfile();
 
         binding.ivAvatar.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +64,18 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    Log.d("f_global", "profile: successfully saved name");
                     prefs.saveProfileName(binding.etName.getText().toString());
+                    Log.d("f_global", "profile: successfully saved name");
+                }
+            }
+        });
+
+        binding.etSurname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    prefs.saveProfileSurname(binding.etSurname.getText().toString());
+                    Log.d("f_global", "profile: successfully saved surname");
                 }
             }
         });
@@ -74,6 +84,13 @@ public class ProfileFragment extends Fragment {
     private void initProfile() {
         Log.d("f_global", "profile: profile initializing");
         binding.etName.setText(prefs.loadProfileName());
+        binding.etSurname.setText(prefs.loadProfileSurname());
+
+        try {
+            binding.ivAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
+        } catch (NullPointerException e) {
+            Log.e("f_global", "profile: failed to load profile avatar!");
+        }
     }
 
     @Override
@@ -93,6 +110,7 @@ public class ProfileFragment extends Fragment {
                         e.printStackTrace();
                     }
                     binding.ivAvatar.setImageBitmap(bitmap);
+                    prefs.saveProfileAvatar(selectedImage);
                 }
         }
     }
