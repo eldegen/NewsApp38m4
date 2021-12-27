@@ -14,11 +14,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.newsapp38m4.Prefs;
 import com.example.newsapp38m4.databinding.FragmentProfileBinding;
 
 import java.io.IOException;
@@ -26,11 +28,17 @@ import java.io.IOException;
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private static Uri avatarBuffer;
+
+    private Prefs prefs;
+
+    private String nameBuffer;
+    private String surnameBuffer;
     static final int REQUEST_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        prefs = new Prefs(getContext());
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -39,6 +47,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.ivAvatar.setImageURI(avatarBuffer);
+        initProfile();
 
         binding.ivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +57,23 @@ public class ProfileFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
+        //
+
+        binding.etName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    Log.d("f_global", "profile: successfully saved name");
+                    prefs.saveProfileName(binding.etName.getText().toString());
+                }
+            }
+        });
+    }
+
+    private void initProfile() {
+        Log.d("f_global", "profile: profile initializing");
+        binding.etName.setText(prefs.loadProfileName());
     }
 
     @Override
