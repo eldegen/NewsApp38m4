@@ -1,8 +1,10 @@
 package com.example.newsapp38m4;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.newsapp38m4.ui.board.BoardAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         binding.tvSkipBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Prefs(MainActivity.this).saveBoardState();
                 navController.navigateUp();
             }
         });

@@ -8,7 +8,7 @@ public class Prefs {
     private SharedPreferences preferences;
 
     public Prefs (Context context) {
-        preferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        preferences = context.getSharedPreferences("settings", 0);
     }
 
     public void saveBoardState() {
@@ -26,7 +26,7 @@ public class Prefs {
     }
 
     public String loadProfileAvatar() {
-        return preferences.getString("putAvatar", null);
+        return preferences.getString("putAvatar", "");
     }
 
     //

@@ -91,6 +91,7 @@ public class ProfileFragment extends Fragment {
         } catch (NullPointerException e) {
             Log.e("f_global", "profile: failed to load profile avatar!");
         }
+
     }
 
     @Override
