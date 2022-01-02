@@ -14,10 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.newsapp38m4.App;
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentNewsBinding;
 import com.example.newsapp38m4.ui.news.NewsItemModel;
 import com.example.newsapp38m4.ui.news.NewsRecyclerAdapter;
+
+import java.util.ArrayList;
 
 public class NewsFragment extends Fragment {
     private FragmentNewsBinding binding;
@@ -52,6 +55,7 @@ public class NewsFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putSerializable("news.content", newsItemModel); //
         getParentFragmentManager().setFragmentResult("rk.news", bundle);
+        App.getInstance().getDatabase().newsDao().insert(newsItemModel);
         Log.e("f_home", "reached");
         close();
     }
@@ -59,5 +63,9 @@ public class NewsFragment extends Fragment {
     private void close() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         navController.navigateUp();
+    }
+
+    private void save() {
+
     }
 }

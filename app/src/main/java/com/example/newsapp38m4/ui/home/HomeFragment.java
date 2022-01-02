@@ -16,12 +16,15 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.newsapp38m4.App;
 import com.example.newsapp38m4.ui.news.NewsFragment;
 import com.example.newsapp38m4.ui.news.NewsItemModel;
 import com.example.newsapp38m4.ui.news.NewsRecyclerAdapter;
 import com.example.newsapp38m4.ui.news.OnItemClickListener;
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentHomeBinding;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
@@ -42,6 +45,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        List<NewsItemModel> list = App.getInstance().getDatabase().newsDao().getAll();
+        Log.e("f_global", "HomeFragment: List: " + list);
+        recyclerAdapter.addItems(list);
+
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +80,8 @@ public class HomeFragment extends Fragment {
                 bundle.putString("news.edit.title", titleText);
                 newsFragment.setArguments(bundle);
                 openFragment();
+
+                Log.d("f_global", "important: recycler list: " + recyclerAdapter.getListDebug());
             }
 
             @Override

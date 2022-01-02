@@ -12,15 +12,14 @@ import com.example.newsapp38m4.databinding.ItemNewsBinding;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder> {
     private ArrayList<NewsItemModel> list;
-//    private ArrayList<NewsItemModel> date;
     private OnItemClickListener onItemClickListener;
 
     public NewsRecyclerAdapter() {
         list = new ArrayList<>();
-//        date = new ArrayList<>();
     }
 
     @NonNull
@@ -42,8 +41,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     public void addItem(NewsItemModel newsItemModel) {
         list.add(0, newsItemModel);
-
         notifyItemInserted(0);
+    }
+
+    public void addItems(List<NewsItemModel> list) {
+        this.list.addAll(list);
+        notifyDataSetChanged();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -71,6 +74,10 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     public String getItemString(int position) {
         String text = list.get(position).getNewsTitle();
         return text;
+    }
+
+    public ArrayList<NewsItemModel> getListDebug() {
+        return list;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
