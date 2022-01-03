@@ -39,47 +39,57 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         return list.size();
     }
 
+    // Adds article
     public void addItem(NewsItemModel newsItemModel) {
         list.add(0, newsItemModel);
         notifyItemInserted(0);
     }
 
+    // Adds articles (Databases)
     public void addItems(List<NewsItemModel> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
 
+    // Article click listener
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
+    // For "zebra" style. (upd: bruh it's not working)
     public int setItemColor(int bgColor) {
         return bgColor;
     }
 
+    // Gets article
     public NewsItemModel getItem(int position) {
         return list.get(position);
     }
 
+    // Deletes article
     public void deleteItem(int position) {
         list.remove(position);
         notifyDataSetChanged();
     }
 
+    // Edits article
     public void editItem(int position) {
         Bundle bundle = new Bundle();
         bundle.putString("news.edititem", list.get(position).toString());
     }
 
+    // idk what is this
     public String getItemString(int position) {
         String text = list.get(position).getNewsTitle();
         return text;
     }
 
+    // Debug
     public ArrayList<NewsItemModel> getListDebug() {
         return list;
     }
 
+    // News ViewHolder class
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemNewsBinding binding;
         public ViewHolder(@NonNull ItemNewsBinding binding) {
