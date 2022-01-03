@@ -30,6 +30,8 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private NewsRecyclerAdapter recyclerAdapter;
 
+    private boolean sort = false;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,12 @@ public class HomeFragment extends Fragment {
             }
         });
         initList();
+        clickChecker();
+        sortingButton();
+    }
 
+    // Checks the type of click
+    private void clickChecker() {
         recyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
@@ -106,6 +113,26 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+    // Articles sorting system
+    private void sortingButton() {
+        binding.btnSorting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sort) {
+                    sort = false;
+                    Log.d("f_global", "HomeFragment: sorting by date");
+                    binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_date);
+                } else {
+                    sort = true;
+                    Log.d("f_global", "HomeFragment: sorting by A to Z");
+                    binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_alpha);
+                }
+            }
+        });
+    }
+
+    // /////////////////////////////////////////
 
     private void initList() {
         binding.rvHome.setAdapter(recyclerAdapter);

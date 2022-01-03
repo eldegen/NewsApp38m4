@@ -20,9 +20,10 @@
             android:layout_height="wrap_content"/>
 
         <Button
+            android:id="@+id/btn_sorting"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/ic_sorting_alpha"
+            android:background="@drawable/ic_sorting_date"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="3dp"
             android:layout_width="35dp"
