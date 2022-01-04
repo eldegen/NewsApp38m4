@@ -12,6 +12,8 @@ import com.example.newsapp38m4.databinding.ItemNewsBinding;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder> {
@@ -82,6 +84,29 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     public String getItemString(int position) {
         String text = list.get(position).getNewsTitle();
         return text;
+    }
+
+    // ====== Sorting ======
+    // Sorts by alphabet
+    public void sortByAlpha() {
+        Collections.sort(list, new Comparator<NewsItemModel>() {
+            @Override
+            public int compare(NewsItemModel o1, NewsItemModel o2) {
+                return o1.getNewsTitle().compareTo(o2.getNewsTitle());
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    // Sorts by date
+    public void sortByDate() {
+        Collections.sort(list, new Comparator<NewsItemModel>() {
+            @Override
+            public int compare(NewsItemModel o1, NewsItemModel o2) {
+                return Long.compare(o2.getNewsDate(), o1.getNewsDate());
+            }
+        });
+        notifyDataSetChanged();
     }
 
     // Debug

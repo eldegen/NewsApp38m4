@@ -123,10 +123,12 @@ public class HomeFragment extends Fragment {
                     sort = false;
                     Log.d("f_global", "HomeFragment: sorting by date");
                     binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_date);
+                    recyclerAdapter.sortByDate();
                 } else {
                     sort = true;
                     Log.d("f_global", "HomeFragment: sorting by A to Z");
                     binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_alpha);
+                    recyclerAdapter.sortByAlpha();
                 }
             }
         });
