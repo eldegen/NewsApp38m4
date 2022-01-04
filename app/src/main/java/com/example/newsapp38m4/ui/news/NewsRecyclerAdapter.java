@@ -1,6 +1,7 @@
 package com.example.newsapp38m4.ui.news;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     // Adds articles (Databases)
     public void addItems(List<NewsItemModel> list) {
         this.list.addAll(list);
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     // Article click listener
@@ -96,6 +97,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
             }
         });
         notifyDataSetChanged();
+        Log.d("f_global", "sortByAlpha");
     }
 
     // Sorts by date
@@ -106,6 +108,13 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
                 return Long.compare(o2.getNewsDate(), o1.getNewsDate());
             }
         });
+        notifyDataSetChanged();
+        Log.d("f_global", "sortByDate");
+    }
+
+    // Reloads list
+    public void listReload() {
+        list.clear();
         notifyDataSetChanged();
     }
 

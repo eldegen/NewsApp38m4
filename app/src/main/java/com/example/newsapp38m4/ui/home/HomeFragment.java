@@ -58,17 +58,22 @@ public class HomeFragment extends Fragment {
             }
         });
         getParentFragmentManager().setFragmentResultListener("rk.news", getViewLifecycleOwner(), new FragmentResultListener() {
-
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
-
                 recyclerAdapter.addItem(newsItemModel);
+                recyclerAdapter.listReload();
+                recyclerAdapter.addItems(list);
             }
         });
         initList();
         clickChecker();
-        sortingButton();
+        binding.btnSorting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sorting();
+            }
+        });
     }
 
     // Checks the type of click
@@ -115,23 +120,18 @@ public class HomeFragment extends Fragment {
     }
 
     // Articles sorting system
-    private void sortingButton() {
-        binding.btnSorting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sort) {
-                    sort = false;
-                    Log.d("f_global", "HomeFragment: sorting by date");
-                    binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_date);
-                    recyclerAdapter.sortByDate();
-                } else {
-                    sort = true;
-                    Log.d("f_global", "HomeFragment: sorting by A to Z");
-                    binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_alpha);
-                    recyclerAdapter.sortByAlpha();
-                }
-            }
-        });
+    private void sorting() {
+        if(sort) {
+            sort = false;
+            Log.d("f_global", "HomeFragment: sorting by date");
+            binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_date);
+            recyclerAdapter.sortByDate();
+        } else {
+            sort = true;
+            Log.d("f_global", "HomeFragment: sorting by A to Z");
+            binding.btnSorting.setBackgroundResource(R.drawable.ic_sorting_alpha);
+            recyclerAdapter.sortByAlpha();
+        }
     }
 
     // /////////////////////////////////////////
