@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment {
                 recyclerAdapter.addItem(newsItemModel);
                 recyclerAdapter.listReload();
                 recyclerAdapter.addItems(list);
+                recyclerAdapter.sortByDate();
             }
         });
         initList();
