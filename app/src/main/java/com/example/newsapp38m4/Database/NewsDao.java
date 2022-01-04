@@ -1,8 +1,10 @@
 package com.example.newsapp38m4.Database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.newsapp38m4.ui.news.NewsItemModel;
 
@@ -16,4 +18,10 @@ public interface NewsDao {
 
     @Insert
     void insert(NewsItemModel newsItemModel);
+
+    @Update
+    void update(NewsItemModel newsItemModel);
+
+    @Delete
+    void delete(NewsItemModel newsItemModel);
 }

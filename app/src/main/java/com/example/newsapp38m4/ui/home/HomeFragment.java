@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment {
         List<NewsItemModel> list = App.getInstance().getDatabase().newsDao().getAll();
         Log.e("f_global", "HomeFragment: List: " + list);
         recyclerAdapter.addItems(list);
+        recyclerAdapter.sortByDate();
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
