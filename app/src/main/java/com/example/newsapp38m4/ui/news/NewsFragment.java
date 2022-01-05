@@ -65,7 +65,7 @@ public class NewsFragment extends Fragment {
         navController.navigateUp();
     }
 
-    private void save() {
-
+    private void edit(int position, String text) {
+        NewsRecyclerAdapter.getInstance().editItem(position, text);
     }
 }

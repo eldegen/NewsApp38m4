@@ -21,6 +21,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     private ArrayList<NewsItemModel> list;
     private OnItemClickListener onItemClickListener;
 
+    private static NewsRecyclerAdapter instance;
+
     public NewsRecyclerAdapter() {
         list = new ArrayList<>();
     }
@@ -28,6 +30,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        instance = this;
         ItemNewsBinding binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.getContext()));
         return new ViewHolder(binding);
     }
@@ -40,6 +43,10 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public static NewsRecyclerAdapter getInstance() {
+        return instance;
     }
 
     // Adds article
@@ -76,9 +83,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     }
 
     // Edits article
-    public void editItem(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putString("news.edititem", list.get(position).toString());
+    public void editItem(int position, String text) {
+        list.set(position, new NewsItemModel(text, list.get(position).getNewsDate()));
     }
 
     // idk what is this

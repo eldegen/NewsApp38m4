@@ -83,10 +83,7 @@ public class HomeFragment extends Fragment {
         recyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                recyclerAdapter.editItem(position);
                 String titleText = recyclerAdapter.getItemString(position);
-                Log.e("f_home", "sent String to edit: " + titleText);
-//                EditText editText = view.findViewById(R.id.edit_text);
 
                 NewsFragment newsFragment = new NewsFragment();
                 Bundle bundle = new Bundle();
