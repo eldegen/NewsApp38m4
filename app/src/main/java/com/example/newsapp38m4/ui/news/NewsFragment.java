@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class NewsFragment extends Fragment {
     private FragmentNewsBinding binding;
     private NewsRecyclerAdapter recyclerAdapter;
+    private NewsItemModel newsItemModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +38,13 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        newsItemModel = (NewsItemModel) requireArguments().getSerializable("news.edit");
+        try {
+            Log.d("f_global", "NewsFragment: got model, String: " + newsItemModel.getNewsTitle());
+        } catch (NullPointerException e) {
+
+        }
+        if (newsItemModel != null) binding.editText.setText(newsItemModel.getNewsTitle());
 
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +58,13 @@ public class NewsFragment extends Fragment {
         Log.e("f_news", "opened");
 
         String text = binding.editText.getText().toString();
-        NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
+
+        if (newsItemModel == null) {
+            NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
+        } else {
+            newsItemModel.setNewsTitle(text);
+        }
+
         Log.d("f_global", "millis: " + newsItemModel.getNewsDate());
         Bundle bundle = new Bundle();
         bundle.putSerializable("news.content", newsItemModel); //

@@ -29,6 +29,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private NewsRecyclerAdapter recyclerAdapter;
+    private NewsItemModel newsItemModel;
 
     private boolean sort = false;
 
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFragment();
+                openFragment(null);
             }
         });
         getParentFragmentManager().setFragmentResultListener("rk.news", getViewLifecycleOwner(), new FragmentResultListener() {
@@ -83,16 +84,8 @@ public class HomeFragment extends Fragment {
         recyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                String titleText = recyclerAdapter.getItemString(position);
-
-                NewsFragment newsFragment = new NewsFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("title.edit.string", titleText);
-                bundle.putInt("title.pos", position);
-                newsFragment.setArguments(bundle);
-                openFragment();
-
-                Log.d("f_global", "important: recycler list: " + recyclerAdapter.getListDebug());
+                newsItemModel = recyclerAdapter.getItem(position);
+                openFragment(newsItemModel);
             }
 
             @Override
@@ -140,9 +133,13 @@ public class HomeFragment extends Fragment {
         binding.rvHome.setAdapter(recyclerAdapter);
     }
 
-    private void openFragment() {
+    private void openFragment(NewsItemModel newsItemModel) {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-        navController.navigate(R.id.newsFragment);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("news.edit", newsItemModel);
+
+        navController.navigate(R.id.newsFragment, bundle);
     }
 
     @Override
