@@ -87,8 +87,8 @@ public class HomeFragment extends Fragment {
 
                 NewsFragment newsFragment = new NewsFragment();
                 Bundle bundle = new Bundle();
-//                bundle.putBoolean("news.edit", true);
-                bundle.putString("news.edit.title", titleText);
+                bundle.putString("title.edit.string", titleText);
+                bundle.putInt("title.pos", position);
                 newsFragment.setArguments(bundle);
                 openFragment();
 
