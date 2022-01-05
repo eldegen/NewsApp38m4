@@ -68,6 +68,8 @@ public class HomeFragment extends Fragment {
                 NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
                 recyclerAdapter.addItem(newsItemModel);
                 recyclerAdapter.listReload();
+
+                List<NewsItemModel> list = App.getInstance().getDatabase().newsDao().getAll();
                 recyclerAdapter.addItems(list);
                 recyclerAdapter.sortByDate();
             }
@@ -85,6 +87,8 @@ public class HomeFragment extends Fragment {
                     
                 }
                 recyclerAdapter.listReload();
+
+                List<NewsItemModel> list = App.getInstance().getDatabase().newsDao().getAll();
                 recyclerAdapter.addItems(list);
                 recyclerAdapter.sortByDate();
             }
