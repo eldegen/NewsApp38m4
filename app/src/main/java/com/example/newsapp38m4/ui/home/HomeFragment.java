@@ -2,6 +2,7 @@ package com.example.newsapp38m4.ui.home;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private NewsRecyclerAdapter recyclerAdapter;
     private NewsItemModel newsItemModel;
+    private int pos;
 
     private boolean sort = false;
 
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment {
                 openFragment(null);
             }
         });
+
         getParentFragmentManager().setFragmentResultListener("rk.news", getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -69,6 +72,26 @@ public class HomeFragment extends Fragment {
                 recyclerAdapter.sortByDate();
             }
         });
+        getParentFragmentManager().setFragmentResultListener("rk.news.update", getViewLifecycleOwner(), new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                NewsItemModel newsItemModel = (NewsItemModel) result.getSerializable("news.content");
+//                recyclerAdapter.editItem(newsItemModel);
+                Log.d("f_global", "HomeFragment: got position: " + pos);
+                newsItemModel = recyclerAdapter.getItem(pos);
+                try {
+                    App.getInstance().getDatabase().newsDao().update(newsItemModel);
+                } catch (SQLiteConstraintException e) {
+                    
+                }
+
+
+                recyclerAdapter.listReload();
+                recyclerAdapter.addItems(list);
+                recyclerAdapter.sortByDate();
+            }
+        });
+
         initList();
         clickChecker();
         binding.btnSorting.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +107,7 @@ public class HomeFragment extends Fragment {
         recyclerAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
+                pos = position;
                 newsItemModel = recyclerAdapter.getItem(position);
                 openFragment(newsItemModel);
             }

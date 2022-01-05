@@ -58,18 +58,20 @@ public class NewsFragment extends Fragment {
         Log.e("f_news", "opened");
 
         String text = binding.editText.getText().toString();
-
         if (newsItemModel == null) {
+            Bundle bundle = new Bundle();
             NewsItemModel newsItemModel = new NewsItemModel(text, System.currentTimeMillis());
+            bundle.putSerializable("news.content", newsItemModel);
+            getParentFragmentManager().setFragmentResult("rk.news", bundle);
+            Log.d("f_global", "millis: " + newsItemModel.getNewsDate());
+            App.getInstance().getDatabase().newsDao().insert(newsItemModel);
         } else {
+            Bundle bundle = new Bundle();
             newsItemModel.setNewsTitle(text);
+            bundle.putSerializable("news.content", newsItemModel);
+            getParentFragmentManager().setFragmentResult("rk.news.update", bundle);
         }
 
-        Log.d("f_global", "millis: " + newsItemModel.getNewsDate());
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("news.content", newsItemModel); //
-        getParentFragmentManager().setFragmentResult("rk.news", bundle);
-        App.getInstance().getDatabase().newsDao().insert(newsItemModel);
         Log.e("f_home", "reached");
         close();
     }
@@ -77,9 +79,5 @@ public class NewsFragment extends Fragment {
     private void close() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         navController.navigateUp();
-    }
-
-    private void edit(int position, String text) {
-        NewsRecyclerAdapter.getInstance().editItem(position, text);
     }
 }
