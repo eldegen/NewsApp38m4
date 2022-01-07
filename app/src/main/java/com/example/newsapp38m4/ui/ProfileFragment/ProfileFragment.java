@@ -22,12 +22,15 @@ import android.widget.ImageView;
 
 import com.example.newsapp38m4.Prefs;
 import com.example.newsapp38m4.databinding.FragmentProfileBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private static Uri avatarBuffer;
+    private FirebaseAuth mAuth;
 
     private Prefs prefs;
 
@@ -39,6 +42,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         prefs = new Prefs(getContext());
+        mAuth = FirebaseAuth.getInstance();
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -114,5 +118,13 @@ public class ProfileFragment extends Fragment {
                     prefs.saveProfileAvatar(selectedImage);
                 }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
     }
 }
