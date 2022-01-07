@@ -2,6 +2,8 @@ package com.example.newsapp38m4.ui.ProfileFragment;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,8 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.newsapp38m4.App;
 import com.example.newsapp38m4.Prefs;
+import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -83,6 +89,27 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setTitle("Are you sure you want to log out?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        signOut();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alert.show();
+            }
+        });
     }
 
     private void initProfile() {
@@ -120,11 +147,23 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    public void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
+        navController.navigate(R.id.loginFragment);
+        Log.d("f_global", "Logged out from account");
+    }
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
+        try {
+            Glide.with(this).load(currentUser.getPhotoUrl()).into(binding.ivFirebaseAvatar);
+        } catch (NullPointerException e) {
+            Log.e("f_global", "Profile: failed to load avatar from Firebase!");
+        }
+        binding.ivFirebaseUsername.setText(currentUser.getDisplayName());
     }
 }

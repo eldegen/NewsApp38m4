@@ -22,4 +22,7 @@
     <string name="login_about_text">Войдите, чтобы иметь полный доступ ко всем актуальным новостям!</string>
     <string name="login_welcome_text">Добро пожаловать!</string>
     <string name="login_via_google_text">Войти через Google</string>
+    <string name="account_info_text">Account:</string>
+    <string name="accountusername_blank_text">accountUsername</string>
+    <string name="logout_button_text">Logout</string>
 </resources>
