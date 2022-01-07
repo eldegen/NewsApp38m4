@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.newsapp38m4.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            navController.navigate(R.id.loginFragment);
+        }
+
         Prefs prefs = new Prefs(this);
         if (!prefs.isBoardShown()) navController.navigate(R.id.boardFragment);
 
@@ -59,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
                     if (destination.getId() != R.id.newsFragment) {
                         binding.tvSkipBoard.setVisibility(View.VISIBLE);
                     }
+                }
+
+                if (destination.getId() == R.id.loginFragment) {
+                    getSupportActionBar().hide();
+                    binding.tvSkipBoard.setVisibility(View.GONE);
                 }
             }
         });

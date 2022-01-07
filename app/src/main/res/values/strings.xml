@@ -19,4 +19,7 @@
     <string name="sorting_text">Sorting:</string>
 
     <string name="client_id">1045250748711-ioe8nb99kgm7su6gtb34sanao417c1r6.apps.googleusercontent.com</string>
+    <string name="login_about_text">Войдите, чтобы иметь полный доступ ко всем актуальным новостям!</string>
+    <string name="login_welcome_text">Добро пожаловать!</string>
+    <string name="login_via_google_text">Войти через Google</string>
 </resources>
