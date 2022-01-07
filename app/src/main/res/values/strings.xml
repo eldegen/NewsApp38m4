@@ -17,4 +17,6 @@
     <string name="skip_board_text">Skip</string>
     <string name="ed_change_hint">Tap to change</string>
     <string name="sorting_text">Sorting:</string>
+
+    <string name="client_id">1045250748711-ioe8nb99kgm7su6gtb34sanao417c1r6.apps.googleusercontent.com</string>
 </resources>
