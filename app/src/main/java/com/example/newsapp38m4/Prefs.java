@@ -29,7 +29,7 @@ public class Prefs {
         return preferences.getString("putAvatar", "");
     }
 
-    //
+    // ============ OLD ============
 
     public void saveProfileName(String name) {
         preferences.edit().putString("putName", name).apply();
@@ -47,5 +47,52 @@ public class Prefs {
 
     public String loadProfileSurname() {
         return preferences.getString("putSurname", "");
+    }
+
+    // ============ NEW ============
+
+    // Name/Surname
+    public void saveProfileUsername(String username) {
+        preferences.edit().putString("putUsername", username).apply();
+    }
+
+    public String loadProfileUsername() {
+        return preferences.getString("putUsername", "");
+    }
+
+    // Email
+    public void saveProfileEmail(String email) {
+        preferences.edit().putString("putEmail", email).apply();
+    }
+
+    public String loadProfileEmail() {
+        return preferences.getString("putEmail", "");
+    }
+
+    // Phone
+    public void saveProfilePhone(String phone) {
+        preferences.edit().putString("putPhone", phone);
+    }
+
+    public String loadProfilePhone() {
+        return preferences.getString("putPhone", "");
+    }
+
+    // Gender
+    public void saveProfileGender(String gender) {
+        preferences.edit().putString("putGender", gender).apply();
+    }
+
+    public String loadProfileGender() {
+        return preferences.getString("putGender", "");
+    }
+
+    // Birthday
+    public void saveProfileBirthday(String birthday) {
+        preferences.edit().putString("putBirthday", birthday).apply();
+    }
+
+    public String loadProfileBirthday() {
+        return preferences.getString("putBirthday", "");
     }
 }

@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment {
 
         //
 
-        binding.etName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        /*binding.etName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -88,7 +88,7 @@ public class ProfileFragment extends Fragment {
                     Log.d("f_global", "profile: successfully saved surname");
                 }
             }
-        });
+        });*/
 
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +114,8 @@ public class ProfileFragment extends Fragment {
 
     private void initProfile() {
         Log.d("f_global", "profile: profile initializing");
-        binding.etName.setText(prefs.loadProfileName());
-        binding.etSurname.setText(prefs.loadProfileSurname());
+//        binding.etName.setText(prefs.loadProfileName());
+//        binding.etSurname.setText(prefs.loadProfileSurname());
 
         try {
             binding.ivAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
