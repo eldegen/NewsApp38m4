@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,13 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.example.newsapp38m4.Prefs;
 import com.example.newsapp38m4.R;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
     private String[] titles = new String[] {"Добро пожаловать!", "Новости всегда и везде!", "Новости в прямом эфире!"};
     private String[] subtitles = new String[] {"В лучший новостной портал", "Все необходимые новости под рукой", "Прямо из приложения, без использования сторонних сервисов"};
-    private int[] images = new int[] {R.drawable.ic_newspage, R.drawable.img_newspaper, R.drawable.img_news_globus};
+    private int[] images = new int[]{R.raw.lottie_news_first, R.raw.lottie_people_reading_news, R.raw.lottie_live_animation};
 
     private NavController navController;
     private Context context;
@@ -48,13 +51,13 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTitle, tvSubtitle, btnSkip;
-        private ImageView imageView;
+        private LottieAnimationView lottieAnimationView;
         private Button btnStart;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvSubtitle = itemView.findViewById(R.id.tv_subtitle);
-            imageView = itemView.findViewById(R.id.image_view);
+            lottieAnimationView = itemView.findViewById(R.id.image_view);
             btnStart = itemView.findViewById(R.id.btn_start);
             btnSkip = itemView.findViewById(R.id.tv_skip_board);
 
@@ -70,7 +73,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         public void onBind(int position) {
             tvTitle.setText(titles[position]);
             tvSubtitle.setText(subtitles[position]);
-            imageView.setImageResource(images[position]);
+            lottieAnimationView.setAnimation(images[position]);
 
             if (position == titles.length - 1) {
                 btnStart.setVisibility(View.VISIBLE);
