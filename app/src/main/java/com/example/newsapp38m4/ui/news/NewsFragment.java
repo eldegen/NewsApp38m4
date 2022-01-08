@@ -2,6 +2,7 @@ package com.example.newsapp38m4.ui.news;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +73,9 @@ public class NewsFragment extends Fragment {
             App.getInstance().getDatabase().newsDao().insert(newsItemModel);
 
             addToFirestore(newsItemModel);
+            binding.progressBar.setVisibility(View.VISIBLE);
+            binding.editText.setEnabled(false);
+            binding.btnSave.setEnabled(false);
         } else {
             Bundle bundle = new Bundle();
             newsItemModel.setNewsTitle(text);
@@ -100,5 +105,9 @@ public class NewsFragment extends Fragment {
     private void close() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
         navController.navigateUp();
+    }
+
+    public void callParentMethod(){
+        getActivity().onBackPressed();
     }
 }
