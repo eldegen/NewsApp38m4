@@ -13,6 +13,9 @@ public class NewsItemModel implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    public NewsItemModel() {
+    }
+
     public NewsItemModel(String newsTitle, long newsDate) {
         this.newsTitle = newsTitle;
         this.newsDate = newsDate;

@@ -1,10 +1,12 @@
 package com.example.newsapp38m4.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,28 +16,49 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentDashboardBinding;
+import com.example.newsapp38m4.ui.news.NewsItemModel;
+import com.example.newsapp38m4.ui.news.NewsRecyclerAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
-
-    private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;
+    private NewsRecyclerAdapter recyclerAdapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        recyclerAdapter = new NewsRecyclerAdapter();
+    }
 
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        return binding.getRoot();
+    }
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerAdapter = new NewsRecyclerAdapter();
+        binding.rvDashboard.setAdapter(recyclerAdapter);
+
+        getData();
+    }
+
+    public void getData() {
+        FirebaseFirestore.getInstance().collection("news").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show();
+                List<NewsItemModel> list = queryDocumentSnapshots.toObjects(NewsItemModel.class);
+                Log.d("f_global", "Got data from Firestore: " + list);
+                recyclerAdapter.addItems(list);
+                recyclerAdapter.reload();
             }
         });
-        return root;
     }
 
     @Override

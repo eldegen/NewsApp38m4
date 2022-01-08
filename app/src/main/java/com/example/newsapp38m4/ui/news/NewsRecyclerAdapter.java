@@ -21,8 +21,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     private ArrayList<NewsItemModel> list;
     private OnItemClickListener onItemClickListener;
 
-    private static NewsRecyclerAdapter instance;
-
     public NewsRecyclerAdapter() {
         list = new ArrayList<>();
     }
@@ -30,7 +28,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        instance = this;
         ItemNewsBinding binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.getContext()));
         return new ViewHolder(binding);
     }
@@ -43,10 +40,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    public static NewsRecyclerAdapter getInstance() {
-        return instance;
     }
 
     // Adds article
@@ -121,6 +114,10 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     // Reloads list
     public void listReload() {
         list.clear();
+        notifyDataSetChanged();
+    }
+
+    public void reload() {
         notifyDataSetChanged();
     }
 

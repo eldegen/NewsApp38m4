@@ -19,6 +19,10 @@ import com.example.newsapp38m4.R;
 import com.example.newsapp38m4.databinding.FragmentNewsBinding;
 import com.example.newsapp38m4.ui.news.NewsItemModel;
 import com.example.newsapp38m4.ui.news.NewsRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -65,15 +69,32 @@ public class NewsFragment extends Fragment {
             getParentFragmentManager().setFragmentResult("rk.news", bundle);
             Log.d("f_global", "millis: " + newsItemModel.getNewsDate());
             App.getInstance().getDatabase().newsDao().insert(newsItemModel);
+
+            addToFirestore(newsItemModel);
         } else {
             Bundle bundle = new Bundle();
             newsItemModel.setNewsTitle(text);
             bundle.putSerializable("news.content", newsItemModel);
             getParentFragmentManager().setFragmentResult("rk.news.update", bundle);
+
+            close();
         }
 
         Log.e("f_home", "reached");
-        close();
+    }
+
+    private void addToFirestore(NewsItemModel newsItemModel) {
+        FirebaseFirestore.getInstance().collection("news").add(newsItemModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentReference> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(requireActivity(), "Failure", Toast.LENGTH_SHORT).show();
+                }
+                close();
+            }
+        });
     }
 
     private void close() {
