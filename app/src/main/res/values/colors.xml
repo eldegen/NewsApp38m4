@@ -10,4 +10,5 @@
     <color name="gray">#AFAFAF</color>
     <color name="aqua">#00AEDA</color>
     <color name="red">#FF0000</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

@@ -135,9 +135,11 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*Bundle bundle = new Bundle();
-                    bundle.putString("news.edit", );*/
-                    onItemClickListener.onClick(getAdapterPosition());
+                    try {
+                        onItemClickListener.onClick(getAdapterPosition());
+                    } catch (NullPointerException e) {
+
+                    }
                 }
             });
             binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {

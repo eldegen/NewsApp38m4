@@ -25,4 +25,6 @@
     <string name="account_info_text">Account:</string>
     <string name="accountusername_blank_text">accountUsername</string>
     <string name="logout_button_text">Logout</string>
+    <string name="not_found_text">it\'s quite, too quite…</string>
+    <string name="reload_btn_text">Reload</string>
 </resources>
