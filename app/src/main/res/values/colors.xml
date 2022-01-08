@@ -8,8 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#AFAFAF</color>
+    <color name="transparent_gray">#DC3C3C3C</color>
     <color name="aqua">#00AEDA</color>
     <color name="red">#FF0000</color>
+    <color name="orange">#E43E0A</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="dark_blue">#14223E</color>
 </resources>

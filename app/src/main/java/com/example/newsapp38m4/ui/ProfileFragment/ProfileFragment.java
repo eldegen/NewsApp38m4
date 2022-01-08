@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -59,12 +60,35 @@ public class ProfileFragment extends Fragment {
 //        binding.ivAvatar.setImageURI(avatarBuffer);
         initProfile();
 
-        binding.ivAvatar.setOnClickListener(new View.OnClickListener() {
+        binding.cvSetAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
+        binding.ivAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.ivFullAvatar.setVisibility(View.VISIBLE);
+                binding.btnClose.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.ivFullAvatar.setVisibility(View.GONE);
+                binding.btnClose.setVisibility(View.GONE);
+            }
+        });
+
+        binding.ivFullAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -145,12 +169,17 @@ public class ProfileFragment extends Fragment {
         binding.edGender.setText(prefs.loadProfileGender());
         binding.edBirthday.setText(prefs.loadProfileBirthday());
 
+        if (!prefs.loadProfileAvatar().equals("")) {
+            binding.ivFullAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
+        }
+
         try {
-            binding.ivAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
+            if (!prefs.loadProfileAvatar().equals("")) {
+                binding.ivAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
+            }
         } catch (NullPointerException e) {
             Log.e("f_global", "profile: failed to load profile avatar!");
         }
-
     }
 
     @Override
@@ -171,6 +200,8 @@ public class ProfileFragment extends Fragment {
                     }
                     binding.ivAvatar.setImageBitmap(bitmap);
                     prefs.saveProfileAvatar(selectedImage);
+
+                    binding.ivFullAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
                 }
         }
     }

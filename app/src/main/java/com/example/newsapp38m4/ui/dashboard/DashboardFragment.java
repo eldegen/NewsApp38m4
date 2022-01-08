@@ -37,11 +37,13 @@ public class DashboardFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerAdapter = new NewsRecyclerAdapter();
         binding.rvDashboard.setAdapter(recyclerAdapter);
+        binding.tvReloadText.setText("Loading... Don't close fragment!");
 
         disableButtons();
         getData();
@@ -75,7 +77,7 @@ public class DashboardFragment extends Fragment {
             @SuppressLint("SetTextI18n")
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                 List<NewsItemModel> list = queryDocumentSnapshots.toObjects(NewsItemModel.class);
                 Log.d("f_global", "Got data from Firestore: " + list);
                 binding.tvReloadText.setText("Reload");
