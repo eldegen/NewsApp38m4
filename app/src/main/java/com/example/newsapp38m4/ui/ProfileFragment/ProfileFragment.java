@@ -70,25 +70,50 @@ public class ProfileFragment extends Fragment {
 
         //
 
-        /*binding.etName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        binding.edUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    prefs.saveProfileName(binding.etName.getText().toString());
-                    Log.d("f_global", "profile: successfully saved name");
+                    prefs.saveProfileUsername(binding.edUsername.getText().toString());
                 }
             }
         });
 
-        binding.etSurname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        binding.edEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    prefs.saveProfileSurname(binding.etSurname.getText().toString());
-                    Log.d("f_global", "profile: successfully saved surname");
+                    prefs.saveProfileEmail(binding.edEmail.getText().toString());
                 }
             }
-        });*/
+        });
+
+        binding.edPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    prefs.saveProfilePhone(binding.edPhone.getText().toString());
+                }
+            }
+        });
+
+        binding.edGender.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    prefs.saveProfileGender(binding.edGender.getText().toString());
+                }
+            }
+        });
+
+        binding.edBirthday.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    prefs.saveProfileBirthday(binding.edBirthday.getText().toString());
+                }
+            }
+        });
 
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +139,11 @@ public class ProfileFragment extends Fragment {
 
     private void initProfile() {
         Log.d("f_global", "profile: profile initializing");
-//        binding.etName.setText(prefs.loadProfileName());
-//        binding.etSurname.setText(prefs.loadProfileSurname());
+        binding.edUsername.setText(prefs.loadProfileUsername());
+        binding.edEmail.setText(prefs.loadProfileEmail());
+        binding.edPhone.setText(prefs.loadProfilePhone());
+        binding.edGender.setText(prefs.loadProfileGender());
+        binding.edBirthday.setText(prefs.loadProfileBirthday());
 
         try {
             binding.ivAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));

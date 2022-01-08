@@ -71,7 +71,7 @@ public class Prefs {
 
     // Phone
     public void saveProfilePhone(String phone) {
-        preferences.edit().putString("putPhone", phone);
+        preferences.edit().putString("putPhone", phone).apply();
     }
 
     public String loadProfilePhone() {

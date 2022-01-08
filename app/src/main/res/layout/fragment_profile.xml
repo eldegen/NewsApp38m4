@@ -39,6 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_username"
+                android:singleLine="true"
                 android:hint="Name/Surname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -48,6 +50,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
                 android:hint="Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -58,6 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_phone"
+                android:singleLine="true"
                 android:inputType="phone"
                 android:hint="Phone"
                 android:layout_width="match_parent"
@@ -68,6 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_gender"
+                android:singleLine="true"
                 android:hint="Gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -77,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_birthday"
+                android:singleLine="true"
                 android:inputType="date"
                 android:hint="Date of Birth"
                 android:layout_width="match_parent"
