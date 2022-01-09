@@ -170,12 +170,12 @@ public class ProfileFragment extends Fragment {
         binding.edBirthday.setText(prefs.loadProfileBirthday());
 
         if (!prefs.loadProfileAvatar().equals("")) {
-            binding.ivFullAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
+            Glide.with(this).load(prefs.loadProfileAvatar()).into(binding.ivFullAvatar);
         }
 
         try {
             if (!prefs.loadProfileAvatar().equals("")) {
-                binding.ivAvatar.setImageURI(Uri.parse(prefs.loadProfileAvatar()));
+                Glide.with(this).load(prefs.loadProfileAvatar()).into(binding.ivAvatar);
             }
         } catch (NullPointerException e) {
             Log.e("f_global", "profile: failed to load profile avatar!");
